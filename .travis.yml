@@ -25,12 +25,14 @@ deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: arn:aws:s3:::freelec-springboot-bucket-build
+    bucket: freelec-springboot-bucket-build
     region: ap-northeast-2
     skip_cleanup: true
     acl: private
     local_dir: deploy
     wait-untill-deployed: true
+    on:
+      all_branches: true
 
 before_install:
   - chmod +x gradlew
