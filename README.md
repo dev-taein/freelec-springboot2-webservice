@@ -6,7 +6,7 @@ http://ec2-15-165-198-250.ap-northeast-2.compute.amazonaws.com/
 + 스프링부트와 AWS 무중단 배포 경험 쌓기
 ------------
 # Build.gradle 설정
-+ Tools : Intellij IDEA, Gradle 4.8
++ Tools : Intellij IDEA, Gradle 4.8, Maria DB
 > build.gradle 소스 코드
 ```
 buildscript {
