@@ -513,8 +513,26 @@ Done. Your build exited with 0.
 > 추가 기능(plugins)
 
 
-+ignore +mustache +database Navigator +Lombok
++ ignore
++ mustache
++ database Navigator
++ Lombok : Getter, Setter, 기본 생성자, toString 등을 어노테이션으로 자동 생성해 준다.
++ JPA : 수십 수백개의 테이블의 SQL를 만들고 관리하기엔 단순 반복 작업을 수백 번 해야 한다. 또한 상속, 1:N 등 다양한 객체 모델링을 데이터베이스로 구현할 수 없다. JPA는 이러한 문제를 해결 하기 위해 등장하였고 개발자는 객체지향적으로 프로그래밍을 하고, JPA가 이를 관계형 데이터베이스에 맞게 SQL을 대신 생성해서 실행한다. 개발자는 항상 객체지향적으로 코드를 표현할 수 있으니 더는 SQL에 종속적인 개발을 하지 않아도 된다. 객체 중심으로 개발을 하게 되니 생산성 향상은 물론 유지 보수하기가 정말 편해진다.
 > 스프링 기능
+
+
++ @SpringBootApplcation : 스프링부트의 자동 설정, 스프링 Bean 읽기와 생성 모두 자동으로 설정한다. Application이 있는 위치부터 설정을 읽어 가기 때문에 프로젝트의 최상단에 위치해야한다.
++ @RestController : 컨트롤러를 JSON을 반환하는 컨트롤러로 만들어 준다.
++ @GetMapping : HTTP Method인 Get의 요청을 받을 수 있는 API를 만들어 준다.
++ @RunWith(SpringRunner.class) : 스프링 부트 테스트와 JUnit 사이에 연결자 역할을 한다.
++ @WebMvcTest : 여러 스프링 테스트 어노테이션 중, Web(Spring MVC)에 집중할 수 있다.
++ @Autowired : 스프링이 관리하는 빈을 주입 받는다.
++ private MockMvc mvc : 웹 API를 테스트할 때 사용합니다. 스프링 MVC 테스트의 시작점입니다. 이 클래스를 통해 HTTP GET, POST등에 대한 API테스트를 할 수 있다.
++ @Getter : 선언된 모든 필드의 get 메소드를 생성한다.
++ @RequiredArgsConstructor : 선언된 모든 final 필드가 포함된 생성자를 생성해 준다. final이 없는 필ㄹ드는 생성자에 포함되지 않는다.
++ @RequestParam : 외부에서 API로 넘긴 파라미터를 가져오는 어노테이션이다. @RequestParam("name")을 name(String name)에 저장된다.
++ 
++ dd
 ------------
 # 주요 이슈
 * 
