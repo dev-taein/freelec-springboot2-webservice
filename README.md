@@ -5,8 +5,8 @@ http://ec2-15-165-198-250.ap-northeast-2.compute.amazonaws.com/
 ## 목적
 + 스프링부트와 AWS 무중단 배포 경험 쌓기
 ------------
-# 개발 셋팅
-+ Tools : Intellij IDEA
+# Build.gradle 설정
++ Tools : Intellij IDEA, Gradle 4.8
 > build.gradle 소스 코드
 ```
 buildscript {
@@ -21,6 +21,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
