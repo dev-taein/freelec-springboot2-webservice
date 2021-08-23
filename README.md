@@ -513,8 +513,8 @@ Done. Your build exited with 0.
 > 추가 기능(plugins)
 
 
-+ ignore
-+ mustache
++ ignore : Intelij에서 바로 Git Commit 할 수 있는 기능
++ mustache : 수 많은 언어를 제공하는 가장 심플한 엔진이다. 문법이 다른 템플릿 엔진보다 심플하고 로직 코드를 사용할 수 없어 view의 역할과 서버의 역할이 명확하게 분리된다. Mustache.js, Mustache.java 2가지가 다 있어, 하나의 문법으로 클라이언트/서버 템플릿을 모두 사용 가능합니다.
 + database Navigator
 + Lombok : Getter, Setter, 기본 생성자, toString 등을 어노테이션으로 자동 생성해 준다.
 + JPA : 수십 수백개의 테이블의 SQL를 만들고 관리하기엔 단순 반복 작업을 수백 번 해야 한다. 또한 상속, 1:N 등 다양한 객체 모델링을 데이터베이스로 구현할 수 없다. JPA는 이러한 문제를 해결 하기 위해 등장하였고 개발자는 객체지향적으로 프로그래밍을 하고, JPA가 이를 관계형 데이터베이스에 맞게 SQL을 대신 생성해서 실행한다. 개발자는 항상 객체지향적으로 코드를 표현할 수 있으니 더는 SQL에 종속적인 개발을 하지 않아도 된다. 객체 중심으로 개발을 하게 되니 생산성 향상은 물론 유지 보수하기가 정말 편해진다.
@@ -531,8 +531,17 @@ Done. Your build exited with 0.
 + @Getter : 선언된 모든 필드의 get 메소드를 생성한다.
 + @RequiredArgsConstructor : 선언된 모든 final 필드가 포함된 생성자를 생성해 준다. final이 없는 필ㄹ드는 생성자에 포함되지 않는다.
 + @RequestParam : 외부에서 API로 넘긴 파라미터를 가져오는 어노테이션이다. @RequestParam("name")을 name(String name)에 저장된다.
-+ 
-+ dd
++ @Entity : 테이블과 링크될 클래스임을 나타낸다. ex) SalesManager.java -> sales_manager table
++ @Id : 해당 테이블의 PK 필드
++ @GeneratedValue : PK의 생성 규칙을 나타낸다. GeneratedType.IDENTITY 옵션을 추가하면 auto_increment가 된다.
++ @Column : 테이블의 칼럼을 나타내면 굳이 선언하지 않더라도 해당 클래스의 필드는 모두 칼럼이 된다. 기본값 외에 추가로 변경이 필요한 옵션이 있으면 사용한다.
++ @NoArgsConstructor : 기본 생성자 자동 추가
++ @Builder : 해당 클래스의 빌더 패턴 클래스를 생성, 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함한다.
++ @After : Junit에서 단위 테스트가 끝날 때마다 수행되는 메소드를 지정한다.
++ @MappendSuperclass : JPA Entity 클래스들이 BaseTimeEntity을 상속할 경우 필드를(createdDate,modifiedDate)도 칼럼으로 인식하도록 한다.
++ @EntityListerners(AuditingEntityListener.class) : BaseTimeEntity클래스에 Auditing 기능을 포함시킨다.
++ @CreateDate : Entity가 생성되어 저장될 때 시간이 자동 저장된다.
++ @LastModifiedDate : 조회한 Entity의 값을 변경할 때 시간이 자동 저장된다.
 ------------
 # 주요 이슈
 * 
