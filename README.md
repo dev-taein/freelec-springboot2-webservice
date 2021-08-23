@@ -79,9 +79,14 @@ dependencies {
 ------------
 
 
-> putty 배포 스크립트 작성
+> putty 배포 스크립트 작성   
 ![putty배포스크립트작성](https://user-images.githubusercontent.com/77142806/130398855-96821bdb-2caa-4f88-be1a-5edd3fc4b7cc.PNG)
+
+
+> 시큐리티, DB 스크립트   
 ![putty배포스크립트작성2](https://user-images.githubusercontent.com/77142806/130398856-807afae6-2976-41e2-8d46-1851e7473014.PNG)
+
+
 ------------
 
 
