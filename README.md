@@ -54,7 +54,8 @@ dependencies {
 
 
 ------------
-#
+# 동작 (로그인, 글 등록, 수정, 삭제)
+![글등록](https://user-images.githubusercontent.com/77142806/130397525-f0ec15f3-9ee3-419c-a1a7-c9a98ccd7464.gif)
 
 ------------
 
