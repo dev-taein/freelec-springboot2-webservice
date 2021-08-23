@@ -57,6 +57,233 @@ dependencies {
 # 동작 (로그인, 글 등록, 수정, 삭제)
 ![글등록](https://user-images.githubusercontent.com/77142806/130397525-f0ec15f3-9ee3-419c-a1a7-c9a98ccd7464.gif)
 
+
+> index.mustache
+```
+{{>layout/header}}
+
+<h1>스프링부트로 시작하는 웹 서비스 Ver.2.5</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+            {{#GN-user}}
+                Logged in as: <span id="user">{{GN-user}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/GN-user}}
+            {{^GN-user}}
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+            {{/GN-user}}
+        </div>
+    </div>
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                <td>{{author}}</td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+</div>
+{{>layout/footer}}
+```
+
+> index.js
+```
+var main = {
+    init : function () {
+        var _this = this;
+        $('#btn-save').on('click', function () {
+            _this.save();
+        });
+
+        $('#btn-update').on('click', function () {
+            _this.update();
+        });
+
+        $('#btn-delete').on('click', function () {
+            _this.delete();
+        });
+    },
+    save : function () {
+        var data = {
+            title: $('#title').val(),
+            author: $('#author').val(),
+            content: $('#content').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/posts',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 등록되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    update : function () {
+        var data = {
+            title: $('#title').val(),
+            content: $('#content').val()
+        };
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 수정되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    delete : function () {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('글이 삭제되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+
+};
+
+main.init();
+```
+
+
+> indexController
+```
+@RequiredArgsConstructor
+@Controller
+public class IndexController {
+
+    private final PostsService postsService;
+    private final HttpSession httpSession;
+
+    @GetMapping("/")
+    public String index(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("posts", postsService.findAllDesc());
+
+        if(user != null) {
+            model.addAttribute("GN-user", user.getName());
+        }
+        return "index";
+    }
+
+    @GetMapping("posts/save")
+    public String postsSave() {
+        return "posts-save";
+    }
+
+    @GetMapping("/posts/update/{id}")
+    public String postsUpdate(@PathVariable Long id, Model model) {
+        PostsResponseDto dto = postsService.findById(id);
+        model.addAttribute("post", dto);
+
+        return "posts-update";
+    }
+}
+```
+
+> 글쓰기 mustache
+```
+{{>layout/header}}
+
+<h1>게시글 등록</h1>
+
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="author"> 작성자 </label>
+                <input type="text" class="form-control" id="author" placeholder="작성자를 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="content"> 내용 </label>
+                <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+            </div>
+        </form>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+    </div>
+</div>
+
+{{>layout/footer}}
+```
+
+
+> 글 수정 mustache
+```
+{{>layout/header}}
+
+<h1>게시글 수정</h1>
+
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="title">글 번호</label>
+                <input type="text" class="form-control" id="id" value="{{post.id}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" class="form-control" id="title" value="{{post.title}}">
+            </div>
+            <div class="form-group">
+                <label for="author"> 작성자 </label>
+                <input type="text" class="form-control" id="author" value="{{post.author}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="content"> 내용 </label>
+                <textarea class="form-control" id="content">{{post.content}}</textarea>
+            </div>
+        </form>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" class="btn btn-primary" id="btn-update">수정 완료</button>
+        <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+    </div>
+</div>
+
+{{>layout/footer}}
+```
+
+
 ------------
 > 로그인 시 MariaDB user 테이블에 사용자가 기록되며 ROLE를 GUEST에서 USER로 변경하면 글 등록이 가능합니다. 
 ![mariadb](https://user-images.githubusercontent.com/77142806/130398845-2facea14-3e71-4d9d-93f1-57a942da2cf1.PNG)
@@ -286,7 +513,7 @@ Done. Your build exited with 0.
 > 추가 기능(plugins)
 
 
-+ignore +mustache + database Navigator
++ignore +mustache +database Navigator +Lombok
 > 스프링 기능
 ------------
 # 주요 이슈
