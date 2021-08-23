@@ -509,7 +509,7 @@ Done. Your build exited with 0.
 
 ------------
 ------------
-# 사용한 기능
+# 사용한 Spring 어노테이션
 > 추가 기능(plugins)
 
 
@@ -542,6 +542,10 @@ Done. Your build exited with 0.
 + @EntityListerners(AuditingEntityListener.class) : BaseTimeEntity클래스에 Auditing 기능을 포함시킨다.
 + @CreateDate : Entity가 생성되어 저장될 때 시간이 자동 저장된다.
 + @LastModifiedDate : 조회한 Entity의 값을 변경할 때 시간이 자동 저장된다.
++ @EnableWebSecurity : Spring Security 설정들을 활성화시켜 줍니다.
++ csrf().disable().headers().frameOptions().disable() : h2-console 화면을 사용하기 위해 해당 옵션들을 disable 한다.
++ authorizeRequests : URL별 권한 관리를 설정하는 옵션의 시작점입니다.
++ antMatchers : 권한 관리 대상을 지정하는 옵션, URL, HTTP 메소드별로 관리가 가능합니다. "/" 지정된 URL들을 permitAll()옵션을 통해 전체 열람 권한을 주었습니다.
 ------------
 # 주요 이슈
 * 
