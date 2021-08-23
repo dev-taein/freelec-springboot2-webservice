@@ -543,6 +543,7 @@ Done. Your build exited with 0.
 + @CreateDate : Entity가 생성되어 저장될 때 시간이 자동 저장된다.
 + @LastModifiedDate : 조회한 Entity의 값을 변경할 때 시간이 자동 저장된다.
 + @WithMockUser(roles="USER") : 인증된 모의 사용자를 만들어서 사용한다.
++ @Before : 매번 테스트가 시작되기 전에 MockMvc 인스턴스를 생성한다.
 
 
 > Spring Security
@@ -565,10 +566,16 @@ Done. Your build exited with 0.
 + @interface : 이 파일을 어노테이션 클래스로 지정한다. LoginUser라는 이름을 가진 어노테이션이 생성되었다고 보면 된다..
 ------------
 # 주요 이슈
-* 
+* 로그인 후 userName이 바뀌지 않은 문제
+* 프로젝트 Build Test 문제
+* AWS 도메인 주소로 접속 시 페이지 문제 Whitelabel Error Page This application has no explicit mapping for /error, so you are seeing this as a fallback.
+* Travis CI 배포가 안되는 문제
+* putty hostName 변경 문제
+* putty DB Connection 문제
+* putty EC2 서버 접속 실패 문제
 ------------
 # 느낀점
-
+- ㅇ
 ------------
 
  
