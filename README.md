@@ -1,6 +1,6 @@
 # 스프링 부트와 AWS로 혼자 구현하는 웹 서비스   
 http://ec2-15-165-198-250.ap-northeast-2.compute.amazonaws.com/   
-#### AWS의 무료 이용 기간 1년이므로 링크의 주소가 만료될 수 있습니다.<br>(소셜 로그인 후 글 등록은 사용 할 수없습니다.제가 DB에서 직접 권한을 바꾸어야 등록할 수 있습니다.
+#### AWS의 무료 이용 기간 1년이므로 링크의 주소가 만료될 수 있습니다.<br>
 ------------
 ## 목적
 + 스프링부트와 AWS 무중단 배포 경험 쌓기
@@ -509,7 +509,7 @@ Done. Your build exited with 0.
 
 ------------
 ------------
-# 사용한 Spring 어노테이션
+# 사용한 Spring 기능들
 > 추가 기능(plugins)
 
 
@@ -518,7 +518,7 @@ Done. Your build exited with 0.
 + database Navigator
 + Lombok : Getter, Setter, 기본 생성자, toString 등을 어노테이션으로 자동 생성해 준다.
 + JPA : 수십 수백개의 테이블의 SQL를 만들고 관리하기엔 단순 반복 작업을 수백 번 해야 한다. 또한 상속, 1:N 등 다양한 객체 모델링을 데이터베이스로 구현할 수 없다. JPA는 이러한 문제를 해결 하기 위해 등장하였고 개발자는 객체지향적으로 프로그래밍을 하고, JPA가 이를 관계형 데이터베이스에 맞게 SQL을 대신 생성해서 실행한다. 개발자는 항상 객체지향적으로 코드를 표현할 수 있으니 더는 SQL에 종속적인 개발을 하지 않아도 된다. 객체 중심으로 개발을 하게 되니 생산성 향상은 물론 유지 보수하기가 정말 편해진다.
-> 스프링 기능
+> 스프링 어노테이션
 
 
 + @SpringBootApplcation : 스프링부트의 자동 설정, 스프링 Bean 읽기와 생성 모두 자동으로 설정한다. Application이 있는 위치부터 설정을 읽어 가기 때문에 프로젝트의 최상단에 위치해야한다.
@@ -542,6 +542,8 @@ Done. Your build exited with 0.
 + @EntityListerners(AuditingEntityListener.class) : BaseTimeEntity클래스에 Auditing 기능을 포함시킨다.
 + @CreateDate : Entity가 생성되어 저장될 때 시간이 자동 저장된다.
 + @LastModifiedDate : 조회한 Entity의 값을 변경할 때 시간이 자동 저장된다.
+
+> Spring Security
 + @EnableWebSecurity : Spring Security 설정들을 활성화시켜 줍니다.
 + csrf().disable().headers().frameOptions().disable() : h2-console 화면을 사용하기 위해 해당 옵션들을 disable 한다.
 + authorizeRequests : URL별 권한 관리를 설정하는 옵션의 시작점입니다.
