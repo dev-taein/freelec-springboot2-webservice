@@ -542,12 +542,27 @@ Done. Your build exited with 0.
 + @EntityListerners(AuditingEntityListener.class) : BaseTimeEntity클래스에 Auditing 기능을 포함시킨다.
 + @CreateDate : Entity가 생성되어 저장될 때 시간이 자동 저장된다.
 + @LastModifiedDate : 조회한 Entity의 값을 변경할 때 시간이 자동 저장된다.
++ @WithMockUser(roles="USER") : 인증된 모의 사용자를 만들어서 사용한다.
+
 
 > Spring Security
 + @EnableWebSecurity : Spring Security 설정들을 활성화시켜 줍니다.
 + csrf().disable().headers().frameOptions().disable() : h2-console 화면을 사용하기 위해 해당 옵션들을 disable 한다.
 + authorizeRequests : URL별 권한 관리를 설정하는 옵션의 시작점입니다.
-+ antMatchers : 권한 관리 대상을 지정하는 옵션, URL, HTTP 메소드별로 관리가 가능합니다. "/" 지정된 URL들을 permitAll()옵션을 통해 전체 열람 권한을 주었습니다.
++ antMatchers : 권한 관리 대상을 지정하는 옵션, URL, HTTP 메소드별로 관리가 가능합니다. "/" 지정된 URL들을 permitAll()옵션을 통해 전체 열람 권한을 주었습니다. "/api/v1/**"주소를 가진 API는 GUEST 권한을 가진 사람만 가능하도록 했습니다.
++ anyRequest : 설정된 값들 이외 나머지 URL들을 나타냅니다. authenticated()을 추가하여 나머지 URL들은 모두 인증된 사용자들에게만 허용합니다. 인증된 사용자 즉, 로그인한 사용자
++ logout().logoutSuccessUrl("/") : 로그아웃 기능에 대한 여러 설정의 진입점입니다. 로그아웃 성공 시 /주소로 이동
++ oauth2Login : OAuth 2 로그인 기능에 대한 여러 설정의 진입점
++ userInfoEndpoint : OAuth 2 로그인 성공 이후 사용자 정보를 가져올 때의 설정들을 담당합니다.
++ userService : 소셜 로그인 성공 시 후속 조치를 진행할 UserService 인터페이스의 구현체를 등록한다. 리소스 서버(즉, 소셜 서비스들)에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능을 명시할 수 있다.
++ registrationId : 현재 로그인 진행 중인 서비스를 구분하는 코드
++ userNameAttributeName : Oauth2 로그인 진행 시 키가 되는 필드값을 이야기합니다. Primary Key와 같은 의미이다. 구글은 코드를 지원하지만 네이버, 카카오는 지원하지 않는다. 이후 네이버, 구글 로그인을 동시 지원할 때 사용된다.
++ OAuthAttributes : OAuth2UserService를 통해 가져온 OAuth2User의 attributte를 담을 클래스입니다. 이후 네이버 등 다른 소셜 로그인도 이 클래스를 사용한다.
++ SessionUser : 세션에 사용자 정보를 저장하기 위한 Dto 클래스이다.
++ of() : OAuth2User에서 ㅂㄴ환하는 사용자 정보는 Map이기 때문에 값 하나하나를 변환해야만 한다.
++ toEntity() : User엔티티를 생성한다. OAuthAttributes에서 엔티티를 생성하는 시점은 처음 가입할 때입니다. 가입할 때의 기본 권한을 Role.GUEST로 설정합니다.
++ @Target(ElementType.PARAMETER) : 이 어노테이션이 생성될 수 있는 위치를 지정한다. PARAMETER로 지정했으니 메소드의 파라미터로 선언된 객체에서만 사용할 수 있다.
++ @interface : 이 파일을 어노테이션 클래스로 지정한다. LoginUser라는 이름을 가진 어노테이션이 생성되었다고 보면 된다..
 ------------
 # 주요 이슈
 * 
