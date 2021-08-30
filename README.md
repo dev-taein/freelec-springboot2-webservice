@@ -1,6 +1,6 @@
 # 스프링 부트와 AWS로 혼자 구현하는 웹 서비스   
 ~~http://ec2-15-165-198-250.ap-northeast-2.compute.amazonaws.com/~~
-#### AWS의 한달 무료 프리티어 용량 30GB이므로 정상 작동하지 않을 수 있음.<br>
+#### AWS의 한달 무료 프리티어 용량 30GB이므로 정상 작동하지 않을 수 있습니다.<br>
 ------------
 ## 목적
 + 스프링부트와 AWS 무중단 배포 경험 쌓기
@@ -507,8 +507,11 @@ Done. Your build exited with 0.
 ```
 
 
-> AWS codeploy
-![deploysh](https://user-images.githubusercontent.com/77142806/131336395-41c8c2ee-84c2-46e7-9035-1e7dd9e5728e.PNG)
+
+> AWS CodeDeploy
+![codeploy](https://user-images.githubusercontent.com/77142806/131336596-653df17a-93c4-44c2-9f26-68d442319491.PNG)
+
+
 ------------
 ------------
 # 사용한 Spring 기능들
