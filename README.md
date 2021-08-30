@@ -507,6 +507,8 @@ Done. Your build exited with 0.
 ```
 
 
+> AWS codeploy
+![deploysh](https://user-images.githubusercontent.com/77142806/131336395-41c8c2ee-84c2-46e7-9035-1e7dd9e5728e.PNG)
 ------------
 ------------
 # 사용한 Spring 기능들
