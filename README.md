@@ -1,6 +1,6 @@
 # 스프링 부트와 AWS로 혼자 구현하는 웹 서비스   
-http://ec2-15-165-198-250.ap-northeast-2.compute.amazonaws.com/   
-#### AWS의 무료 이용 기간 1년이므로 링크의 주소가 만료될 수 있습니다.<br>
+~~http://ec2-15-165-198-250.ap-northeast-2.compute.amazonaws.com/~~
+#### AWS의 한달 무료 프리티어 용량 30GB이므로 정상 작동하지 않을 수 있음.<br>
 ------------
 ## 목적
 + 스프링부트와 AWS 무중단 배포 경험 쌓기
